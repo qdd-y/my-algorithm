@@ -89,6 +89,4 @@ public class mergeKList {
     }
 }
         return dummy.next;
-    }
-    BlockingQueue
 }
