@@ -2,6 +2,7 @@ package cn.qdd.algorithm.LinkedList;
 
 import java.util.PriorityQueue;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * @Author: qdd
@@ -14,7 +15,7 @@ public class mergeKList {
         ListNode l2 = new ListNode(1, new ListNode(3, new ListNode(4)));
         ListNode l3 = new ListNode(2, new ListNode(6));
         ListNode[] lists = {l1,l2,l3};
-        ListNode listNode = new mergeKList().mergeKLists1(lists);
+        ListNode listNode = new mergeKList().mergeKLists2(lists);
         while (listNode != null){
             System.out.print(listNode.val+" ");
             listNode = listNode.next;
@@ -64,12 +65,30 @@ public class mergeKList {
         while (!minHeap.isEmpty()) {
             cur.next = new ListNode(minHeap.poll());
             cur = cur.next;
-            if (cur.next != null) {
-                minHeap.offer(cur.next.val);
-            }
         }
         return dummy.next;
     }
-    ArrayBlockingQueue queue = new ArrayBlockingQueue(10);
 
+    public ListNode mergeKLists2(ListNode[] lists) {
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>(
+                (a, b) -> a.val - b.val
+        );
+        for (ListNode node : lists) {
+            if(node != null){
+                minHeap.offer(node);
+            }
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+        while (!minHeap.isEmpty()) {
+            ListNode min = minHeap.poll();
+            cur.next = min;
+    cur = cur.next;
+            if (min.next !=null){
+        minHeap.offer(min.next);
+    }
+}
+        return dummy.next;
+    }
+    BlockingQueue
 }
