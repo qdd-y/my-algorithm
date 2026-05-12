@@ -25,4 +25,18 @@ public class SymmetryTree {
         }
         return left.val == right.val&&check(left.left,right.right)&&check(left.right,right.left);
     }
+
+    public boolean check1(TreeNode left, TreeNode right){
+        if (left == null && right == null){
+            return true;
+        }
+        if (left == null || right ==null){
+            return false;
+        }
+        if (left.val != right.val){
+            return false;
+        }
+        return check1(left.left,right.right)&&check1(left.right,right.left);
+    }
+
 }
